@@ -1,9 +1,12 @@
+var config = require('./config.json');
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -56,5 +59,8 @@ app.use(function(err, req, res, next) {
     });
 });
 
+// set up mongoose
+mongoose.connect('mongodb://' + config.db_user + ':' + config.db_pass + '@ds031681.mongolab.com:31681/heroku_app33309479');
+require('./models/models');
 
 module.exports = app;
