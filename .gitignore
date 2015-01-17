@@ -57,3 +57,6 @@ node_modules
 npm-debug.log
 
 .idea
+
+### Custom ###
+config.json
