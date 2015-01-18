@@ -90,7 +90,8 @@ module.exports.createUser = function(req, res, next) {
                 } else {
                     var user = new User({
                         email: data.email,
-                        password: hash
+                        password: hash,
+                        isClient: data.isClient
                     });
 
                     user.save(function(err, user) {
