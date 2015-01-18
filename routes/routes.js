@@ -23,7 +23,7 @@ router.get('/users/:id', usersCtrl.getUser);
 router.get('/users/:id/sites', usersCtrl.getUserSites);
 router.put('/users/:id', loginCtrl.isLoggedIn, usersCtrl.updateUser);
 router.delete('/users/:id', loginCtrl.isLoggedIn, usersCtrl.deleteUser);
-router.post('/users', loginCtrl.isLoggedIn, usersCtrl.createUser);
+router.post('/users', usersCtrl.createUser);
 
 
 // TODO: misc weird routes we should delete later
