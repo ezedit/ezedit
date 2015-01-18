@@ -1,3 +1,34 @@
+<!-- New Site Modal -->
+<div class="modal fade" id="newSiteModal" tabindex="-1" role="dialog" aria-labelledby="newSiteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="newSiteModalLabel">Create New Site</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="siteName">Site Name</label>
+                        <input type="text" class="form-control" id="siteName" placeholder="Site Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="siteLogin">Client Login</label>
+                        <input type="text" class="form-control" id="siteLogin" placeholder="Client Login">
+                    </div>
+                    <div class="form-group">
+                        <label for="sitePassword">Client Password</label>
+                        <input type="password" class="form-control" id="sitePassword" placeholder="Client Password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -6,7 +37,7 @@
                     <td>
                         <h2>Your Sites</h2>
                     </td>
-                    <td class="new-site-btn-container"><a class="btn btn-default pull-right" href="#">+Add New Site</a></td>
+                    <td class="new-site-btn-container"><a class="btn btn-new-site btn-default pull-right" href="#" data-toggle="modal" data-target="#newSiteModal">+Add New Site</a></td>
                 </tr>
             </table>
             <table id="sites-table" class="table table-striped">
