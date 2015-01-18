@@ -1,7 +1,5 @@
-try {
+if (!process.env.MONGOLAB_URI) {
     var config = require('./config.json');
-} catch (e) {
-    console.log('Could not find config.json');
 }
 
 var express = require('express');
