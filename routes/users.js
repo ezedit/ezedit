@@ -43,7 +43,7 @@ router.get('/users/:id/sites', function(req, res, next) {
 
 // PUT /users/:id
 router.put('/users/:id',
-  passport.authenticate('local'),
+  // passport.authenticate('local'),
   function(req, res, next) {
     mongoose.model('users').findByIdAndUpdate(req.params.id, req.body, function(err, user) {
       if (err) {
@@ -57,7 +57,7 @@ router.put('/users/:id',
 
 // DELETE /users/:id
 router.delete('/users/:id',
-  passport.authenticate('local'),
+  // passport.authenticate('local'),
   function(req, res, next) {
     mongoose.model('user').findOneAndRemove(req.params.id, function(err, user) {
       if (err) {
@@ -71,7 +71,7 @@ router.delete('/users/:id',
 
 // POST /users
 router.post('/users',
-  passport.authenticate('local'),
+  // passport.authenticate('local'),
   function(req, res, next) {
     var User = require('../models/user');
     var data = req.body;

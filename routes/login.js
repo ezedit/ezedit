@@ -33,8 +33,9 @@ router.get('/login/:password/:hash', function(req, res, next) {
 });
 
 router.post('/login',
-    passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }),
+    // passport.authenticate('local'),
     function(req, res, next) {
+      console.log(req);
       res.send(200);
     }
 );

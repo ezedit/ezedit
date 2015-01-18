@@ -70,7 +70,7 @@ router.get('/sites/:id/script', function(req, res, next) {
 
 // PUT /sites/:id
 router.put('/sites/:id',
-  passport.authenticate('local'),
+  // passport.authenticate('local'),
   function(req, res, next) {
     mongoose.model('site').findByIdAndUpdate(req.params.id, req.body, function(err, site) {
       if (err) {
@@ -84,7 +84,7 @@ router.put('/sites/:id',
 
 // DELETE /sites/:id
 router.delete('/sites/:id',
-  passport.authenticate('local'),
+  // passport.authenticate('local'),
   function(req, res, next) {
     mongoose.model('site').findOneAndRemove(req.params.id, function(err, site) {
       if (err) {
@@ -98,7 +98,7 @@ router.delete('/sites/:id',
 
 // POST /site
 router.post('/sites',
-  passport.authenticate('local'),
+  // passport.authenticate('local'),
   function(req, res, next) {
     var Site = require('../models/site');
     var data = req.body;
