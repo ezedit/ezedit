@@ -35,6 +35,41 @@ router.get('/sites/:id', function(req, res, next) {
   });
 });
 
+// GET /sites/:id/script
+router.get('/sites/:id/script', function(req, res, next) {
+  mongoose.model('site').findOne({ _id: req.params.id }, function(err, site) {
+    if (err) {
+      console.log(err);
+      next();
+    } else {
+      var content = _.omit(site.toObject(), ['__v', 'password']);
+      console.log(content);
+      var script = 'var content = {';
+      script += 'name: ' + content.name + ', ';
+      script += 'login: ' + content.login;
+
+      if (content.fields !== undefined && content.fields.length !== 0) {
+        script +=', fields: [';
+
+        content.fields.forEach(function(element) {
+          script += '{';
+          script += 'name: ' + element.name + ', ';
+          script += 'description: ' + element.name + ', ';
+          script += 'body: ' + element.body;
+          script += '},';
+        });
+
+        // remove trailing comma
+        script = script.slice(0, -1);
+        script += ']';
+      }
+
+      script += '};';
+      res.status(200).send(script);
+    }
+  });
+});
+
 // PUT /sites/:id
 router.put('/sites/:id', function(req, res, next) {
   // @TODO: add param verification
