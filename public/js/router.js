@@ -10,35 +10,34 @@ define([
         routes: {
             '': 'showFrontPage',
             'sites': 'showSites',
-            'site/:id': 'showSite'
+            'sites/:id': 'showSite'
         },
 
         showFrontPage: function(){
-            this.switchPage(new FrontPageView());
+            this.switchPage(new FrontPageView({router: this}));
+            this.navigate('');
         },
 
         showSites: function(){
-            this.switchPage(new SitesPageView());
+            this.switchPage(new SitesPageView({router: this}));
+            this.navigate('sites');
         },
 
-        showSite: function(){
-            this.switchPage(new SitePageView());
+        showSite: function(id){
+            this.switchPage(new SitePageView({router: this}));
+            this.navigate('sites/'+id);
         },
 
         switchPage: function(view){
             this.view && (this.view.close ? this.view.close() : this.view.remove())
             this.view = view;
             $("#content").html(view.render().el);
+            Backbone.trigger('page-switch');
         }
     });
 
-    var initialize = function(){
-        var router = new AppRouter();
-        Backbone.history.start();
-        return router;
-    };
+    var router = new AppRouter();
 
-    return {
-        initialize: initialize
-    };
+    Backbone.history.start();
+    return router;
 });

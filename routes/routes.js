@@ -8,8 +8,12 @@ var sitesCtrl = require('../controllers/sites');
 var usersCtrl = require('../controllers/users');
 
 router.get('/', loginCtrl.ok); // ???
-router.post('/login', passport.authenticate('local'), loginCtrl.login);
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/api/session',
+    failureRedirect: '/api/session'
+}));
 router.get('/logout', loginCtrl.logout);
+router.get('/session', loginCtrl.isLoggedIn, loginCtrl.getSession)
 
 router.get('/sites', sitesCtrl.getAllSites);
 router.get('/sites/:id', sitesCtrl.getSite);

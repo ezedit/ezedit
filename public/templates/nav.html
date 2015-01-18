@@ -10,16 +10,17 @@
                 <form>
                     <div class="form-group">
                         <label for="loginUsername">Username or Email address</label>
-                        <input type="text" class="form-control" id="loginUsername" placeholder="Username">
+                        <input type="text" class="form-control" id="loginUsername" placeholder="Username" required>
                     </div>
                     <div class="form-group">
                         <label for="loginPassword">Password</label>
-                        <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                        <input type="password" class="form-control" id="loginPassword" placeholder="Password" required>
                     </div>
+                    <button id="real-btn-login" class="hidden" type="submit"></button>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Login</button>
+                <button type="button" id="btn-login" class="btn btn-primary">Login</button>
             </div>
         </div>
     </div>
@@ -37,20 +38,20 @@
                 <form>
                     <div class="form-group">
                         <label for="registerEmail">Email address</label>
-                        <input type="email" class="form-control" id="registerEmail" placeholder="Username">
+                        <input type="email" class="form-control" id="registerEmail" placeholder="Username" required>
                     </div>
                     <div class="form-group">
                         <label for="registerPassword">Password</label>
-                        <input type="password" class="form-control" id="registerPassword" placeholder="Password">
+                        <input type="password" class="form-control" id="registerPassword" placeholder="Password" required>
                     </div>
                     <div class="form-group">
                         <label for="registerConfirmPassword">Confirm Password</label>
-                        <input type="password" class="form-control" id="registerConfirmPassword" placeholder="Confirm Password">
+                        <input type="password" class="form-control" id="registerConfirmPassword" placeholder="Confirm Password" required>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Login</button>
+                <button type="button" id="btn-register" class="btn btn-primary">Register</button>
             </div>
         </div>
     </div>
