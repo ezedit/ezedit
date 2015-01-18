@@ -13,8 +13,9 @@ var mongoose = require('mongoose');
 var apiRoot = '/api';
 var routes = require('./routes/index');
 var apiRoutes = require('./routes/api');
-var siteRoutes = require('./routes/site');
+var siteRoutes = require('./routes/sites');
 var loginRoutes = require('./routes/login');
+var userRoutes = require('./routes/users');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/', routes);
 app.use(apiRoot, apiRoutes);
 app.use(apiRoot, siteRoutes);
 app.use(apiRoot, loginRoutes);
+app.use(apiRoot, userRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -41,23 +43,15 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    });
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500).send(err);
+  });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+  res.status(err.status || 500).send(err.message);
 });
 
 // set up mongoose
