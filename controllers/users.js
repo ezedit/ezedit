@@ -99,7 +99,8 @@ module.exports.createUser = function(req, res, next) {
                             console.log(err);
                             next();
                         } else {
-                            res.send(_.omit(user.toObject(), ['__v', 'password']));
+                            //res.send(_.omit(user.toObject(), ['__v', 'password']));
+                            next();
                         }
                     });
                 }
