@@ -43,17 +43,17 @@ router.get('/sites/:id/script', function(req, res, next) {
       var content = _.omit(site.toObject(), ['__v', 'password']);
       console.log(content);
       var script = 'var content = {';
-      script += 'name: ' + content.name + ', ';
-      script += 'login: ' + content.login;
+      script += 'name: "' + content.name + '", ';
+      script += 'login: "' + content.login + '"';
 
       if (content.fields !== undefined && content.fields.length !== 0) {
         script +=', fields: [';
 
         content.fields.forEach(function(element) {
           script += '{';
-          script += 'name: ' + element.name + ', ';
-          script += 'description: ' + element.name + ', ';
-          script += 'body: ' + element.body;
+          script += 'name: "' + element.name + '", ';
+          script += 'description: "' + element.name + '", ';
+          script += 'body: "' + element.body + '"';
           script += '},';
         });
 
@@ -63,6 +63,15 @@ router.get('/sites/:id/script', function(req, res, next) {
       }
 
       script += '};';
+      script += "\n";
+      script += 'for (var i = 0; i < content.fields.length; i++) {';
+      script += 'var fieldName = content.fields[i].name;';
+      script += 'var fieldBody = content.fields[i].body;';
+      script += 'var selectedFields = document.querySelectorAll(\'[data-ezedit-field="\' + fieldName + \'"]\');';
+      script += 'for (var j = 0; j < selectedFields.length; j++) {';
+      script += 'selectedFields[j].innerHTML = fieldBody;';
+      script += '}';
+      script += '}';
       res.status(200).send(script);
     }
   });
