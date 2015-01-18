@@ -29,7 +29,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // set up passport
-app.use(session({ secret: 'fbgm' }));
+app.use(session({ secret: 'fbgm', resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 require('./passport')(passport);
