@@ -15,7 +15,11 @@ define([
 
         showFrontPage: function(){
             if(window.session)
-                this.showSites();
+                if (!window.session.isClient) {
+                    router.showSites();
+                } else {
+                    router.showSite(data.siteId);
+                }
             else
             {
                 this.switchPage(new FrontPageView({router: this}));
@@ -27,8 +31,12 @@ define([
             if(!window.session)
                 this.showFrontPage();
             else {
-                this.switchPage(new SitesPageView({router: this}));
-                this.navigate('sites');
+                if (window.session.isClient) {
+                    router.showSite(window.session.siteId);
+                } else {
+                    this.switchPage(new SitesPageView({router: this}));
+                    this.navigate('sites');
+                }
             }
         },
 

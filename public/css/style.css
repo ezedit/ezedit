@@ -346,3 +346,7 @@ p > code {
     word-break: break-all;
     font-size: .6em;
 }
+
+.modal-open {
+    overflow: scroll;
+}
