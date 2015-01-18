@@ -332,3 +332,7 @@ body {
 .btn-save-field {
     display: none;
 }
+
+#new-field {
+    display: none;
+}
