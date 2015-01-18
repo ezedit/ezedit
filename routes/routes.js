@@ -27,7 +27,10 @@ router.get('/users/:id', usersCtrl.getUser);
 router.get('/users/:id/sites', usersCtrl.getUserSites);
 router.put('/users/:id', loginCtrl.isLoggedIn, usersCtrl.updateUser);
 router.delete('/users/:id', loginCtrl.isLoggedIn, usersCtrl.deleteUser);
-router.post('/users',  usersCtrl.createUser);
+router.post('/users', usersCtrl.createUser, passport.authenticate('local', {
+    successRedirect: '/api/session',
+    failureRedirect: '/api/session'
+}));
 
 
 // TODO: misc weird routes we should delete later
