@@ -1,11 +1,9 @@
-var config = require('../config.json');
 var bcrypt = require('bcrypt');
 var express = require('express');
 var router = express.Router();
 
 // GET /
 router.get('/login', function(req, res, next) {
-  console.log(config.salt);
   bcrypt.genSalt(10, function(err, salt) {
     if (err) {
       console.log(err);
