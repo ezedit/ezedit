@@ -13,6 +13,8 @@ define([
         events: {
             'click #btn-login': 'submitLogin',
             'submit #loginModal form': 'login',
+            'click #btn-register': 'submitCreateAccount',
+            'submit #registerModal form': 'createAccount',
             'click #nav-logout': 'logout'
         },
 
@@ -50,6 +52,34 @@ define([
             $.ajax({
                 type: "POST",
                 url: '/api/login',
+                data: JSON.stringify(data),
+                dataType: 'json',
+                contentType: 'application/json'
+            }).done(function(data){
+                window.session = data;
+                Router.showSites();
+            }).fail(function() {
+                console.log("login failed");
+                // TODO: show login failed to user
+            });
+        },
+
+        submitCreateAccount: function() {
+            console.log("clicking an invisible button");
+            this.$('#real-btn-register').click();
+        },
+
+        createAccount: function() {
+            var formEls = $('#registerModal form')[0].elements;
+            var data = {
+                email: formEls['registerEmail'].value,
+                password: formEls['registerPassword'].value,
+                // TODO: Confirm password with registerConfirmPassword
+                isClient: false
+            };
+            $.ajax({
+                type: "POST",
+                url: '/api/users',
                 data: JSON.stringify(data),
                 dataType: 'json',
                 contentType: 'application/json'
