@@ -5,4 +5,4 @@ var userSchema = mongoose.Schema({
     password: String
 });
 
-module.exports = siteSchema;
+module.exports = userSchema;
