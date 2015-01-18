@@ -44,7 +44,7 @@ define([
             {
                 for(var k=0;k<this.site.fields.length;k++)
                 {
-                    var fieldView = new FieldView({model: this.site.fields[k]});
+                    var fieldView = new FieldView({model: this.site.fields[k], site: this.site, siteId: this.siteId, parent: this});
                     this.$('#fields-container').append(fieldView.render().el);
                 }
             }

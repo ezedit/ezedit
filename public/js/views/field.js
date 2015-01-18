@@ -15,18 +15,25 @@ define([
             'click .btn-save-field': 'save'
         },
 
+        initialize: function(opt) {
+            this.site = opt.site;
+            this.siteId = opt.siteId;
+            this.parent = opt.parent;
+
+        },
+
         render: function(){
             this.$el.html(this.template(this.model));
-            this.$('.field-name').editable({
-               success: function() {
-                   console.log("Edited field name!");
-               }
-            });
-            this.$('.field-description').editable({
-               success: function() {
-                   console.log("Edited field description!");
-               }
-            });
+            //this.$('.field-name').editable({
+            //   success: function() {
+            //       console.log("Edited field name!");
+            //   }
+            //});
+            //this.$('.field-description').editable({
+            //   success: function() {
+            //       console.log("Edited field description!");
+            //   }
+            //});
             return this;
         },
 
@@ -36,7 +43,22 @@ define([
         },
 
         save: function() {
-            console.log("saved");
+            var self = this;
+            this.model.body = this.$('.field-body').val();
+            $.ajax({
+                type: "PUT",
+                url: '/api/sites/'+this.siteId,
+                data: JSON.stringify(this.site),
+                dataType: 'json',
+                contentType: 'application/json'
+            }).done(function(data){
+                self.parent.site = self.site = data;
+                self.$('.btn-new-field').show();
+                self.$('#new-field').hide();
+                self.parent.render();
+            }).fail(function() {
+                console.log("failed to update site fields");
+            });
             this.$('.btn-save-field').hide();
         }
 
