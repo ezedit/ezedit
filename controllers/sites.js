@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 var _ = require('underscore');
 
 module.exports.getAllSites = function(req, res, next) {
@@ -95,22 +96,50 @@ module.exports.deleteSite = function(req, res, next) {
 
 module.exports.createSite = function(req, res, next) {
     var Site = require('../models/site');
+    var User = require('../models/user');
     var data = req.body;
 
-    var site = new Site({
-        user: req.user.id,
-        name: data.name,
-        login: data.login,
-        password: data.password,
-        fields: data.fields
-    });
-
-    site.save(function(err, site) {
+    // Create the user.
+    bcrypt.genSalt(10, function(err, salt) {
         if (err) {
             console.log(err);
-            next();
         } else {
-            res.send(site);
+            bcrypt.hash(data.password, salt, function(err, hash) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var user = new User({
+                        email: data.login,
+                        password: hash,
+                        isClient: true
+                    });
+
+                    user.save(function(err, user) {
+                        if (err) {
+                            console.log(err);
+                            next();
+                        } else {
+                            var site = new Site({
+                                user: req.user.id,
+                                client: user.id,
+                                name: data.name,
+                                login: data.login,
+                                password: data.password,
+                                fields: data.fields
+                            });
+
+                            site.save(function(err, site) {
+                                if (err) {
+                                    console.log(err);
+                                    next();
+                                } else {
+                                    res.send(site);
+                                }
+                            });
+                        }
+                    });
+                }
+            });
         }
     });
 };

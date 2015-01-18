@@ -12,8 +12,11 @@
 
             $.get('/api/session').done(function(data) {
                 window.session = data;
-                // TODO: navigate to right page based on user type
-                router.showSites();
+                if (!data.isClient) {
+                    router.showSites();
+                } else {
+                    router.showSite(data.siteId);
+                }
             }).fail(function(xhr, status, errorThrown){
                 window.session = undefined;
                 router.showFrontPage();
