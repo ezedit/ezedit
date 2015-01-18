@@ -30,15 +30,16 @@ module.exports.getSite = function(req, res, next) {
 };
 
 module.exports.getSiteScript = function(req, res, next) {
+
     mongoose.model('site').findOne({ _id: req.params.id }, function(err, site) {
         if (err) {
             console.log(err);
             next();
         } else {
             var content = _.omit(site.toObject(), ['__v', 'password']);
-            console.log(content);
             fs.readFile('templates/clientScript.js', function(err, data){
-                console.log(data);
+                res.header("Access-Control-Allow-Origin", "*");
+                res.header("Access-Control-Allow-Headers", "X-Requested-With");
                 res.status(200).send(_.template(data.toString())( content));
             })
         }

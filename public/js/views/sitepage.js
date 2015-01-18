@@ -39,7 +39,7 @@ define([
         },
 
         render: function(){
-            this.$el.html(this.template());
+            this.$el.html(this.template({siteId: this.siteId}));
             if(this.site)
             {
                 for(var k=0;k<this.site.fields.length;k++)

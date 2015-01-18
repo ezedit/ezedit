@@ -340,3 +340,8 @@ body {
 #new-field {
     display: none;
 }
+
+p > code {
+    word-break: break-all;
+    font-size: .6em;
+}
