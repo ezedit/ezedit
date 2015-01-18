@@ -2,8 +2,9 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'views/frontpage'
-], function($, _, Backbone, FrontPageView){
+    'views/frontpage',
+    'views/sitespage'
+], function($, _, Backbone, FrontPageView, SitesPageView){
     var AppRouter = Backbone.Router.extend({
         routes: {
             '': 'showFrontPage',
@@ -16,7 +17,7 @@ define([
         },
 
         showSites: function(){
-            this.switchPage(new FrontPageView());
+            this.switchPage(new SitesPageView());
         },
 
         showSite: function(){

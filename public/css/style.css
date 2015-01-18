@@ -9,7 +9,7 @@ body {
     height: 100%;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #fff;
-    background-color: #000;
+    background-color: #009688;
 }
 
 html {
@@ -67,7 +67,7 @@ a:focus {
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: #000;
-    position: absolute;
+    position: relative;
     right: 0;
     left: 0;
     top: 0;
@@ -199,7 +199,6 @@ a:focus {
 }
 
 .btn {
-    text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 400;
     -webkit-transition: all .3s ease-in-out;
@@ -208,8 +207,8 @@ a:focus {
 }
 
 .btn-default {
-    border: 1px solid #219ab3;
-    color: #219ab3;
+    border: 1px solid #fff;
+    color: #fff;
     background-color: transparent;
 }
 
@@ -255,4 +254,31 @@ img::-moz-selection {
 
 body {
     webkit-tap-highlight-color: rgba(255,255,255,.2);
+}
+
+.table-striped>tbody>tr:nth-child(odd) {
+    background-color: #4DB6AC;
+}
+
+.table-striped>tbody>tr:nth-child(even) {
+    background-color: #80CBC4;
+}
+
+#sites-table a {
+    color: #ffffff;
+}
+
+#sites-table a.btn-site-edit {
+    font-size: 1.5em;
+    line-height: 1.5em
+}
+
+#sites-table .table-label {
+    vertical-align: middle;
+    font-size: 1.7em;
+    padding-left: 24px;
+}
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    border: none;
 }

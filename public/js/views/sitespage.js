@@ -2,18 +2,18 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!/templates/frontpage.html'
+    'text!/templates/sitespage.html'
 ], function($, _, Backbone, templateText){
-    var FrontPageView = Backbone.View.extend({
+    var SitesPageView = Backbone.View.extend({
         tagName: 'div',
         className: 'page',
 
         template: _.template(templateText),
 
         navOptions: {
-            'hideLogin': false,
-            'hideRegister': false,
-            'hideLogout': true
+            'hideLogin': true,
+            'hideRegister': true,
+            'hideLogout': false
         },
 
         render: function(){
@@ -21,5 +21,5 @@ define([
             return this;
         }
     });
-    return FrontPageView;
+    return SitesPageView;
 });
