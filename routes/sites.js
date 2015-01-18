@@ -12,18 +12,25 @@ router.get('/sites', function(req, res, next) {
       next();
     } else {
       res.send(sites);
+
+      // Remove the users password from the display
+      var ret = [];
+      sites.forEach(function(element) {
+        ret.push(_.omit(element.toObject(), ['__v', 'password']));
+      });
+      res.send(ret);
     }
   });
 });
 
 // GET /sites/:id
 router.get('/sites/:id', function(req, res, next) {
-  mongoose.model('site').findOne({ _id: req.params.id }, function(err, sites) {
+  mongoose.model('site').findOne({ _id: req.params.id }, function(err, site) {
     if (err) {
       console.log(err);
       next();
     } else {
-      res.send(sites);
+      res.send(_.omit(site.toObject(), ['__v', 'password']));
     }
   });
 });
@@ -36,7 +43,7 @@ router.put('/sites/:id', function(req, res, next) {
       console.log(err);
       next();
     } else {
-      res.send(site);
+      res.send(_.omit(site.toObject(), ['__v', 'password']));
     }
   });
 });
@@ -70,7 +77,7 @@ router.post('/sites', function(req, res, next) {
         console.log(err);
         next();
       } else {
-        res.send(site);
+        res.send(_.omit(site.toObject(), ['__v', 'password']));
       }
     });
 });
