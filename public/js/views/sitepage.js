@@ -4,10 +4,10 @@ define([
     'backbone',
     'router',
     'text!/templates/sitepage.html',
-    'views/site',
+    'views/field',
     'models/field',
     'models/fields'
-], function($, _, Backbone, Router, templateText, SiteView, Field, Fields){
+], function($, _, Backbone, Router, templateText, FieldView, Field, Fields){
     var SitePageView = Backbone.View.extend({
         tagName: 'div',
         className: 'page',
@@ -26,9 +26,6 @@ define([
         },
 
         initialize: function(){
-            if(!window.session)
-                this.router.showFrontPage();
-
             var testField = {
                 name: 'Bio',
                 description: 'Your main biography that talks about your life story and why you are cool.',
@@ -45,7 +42,7 @@ define([
             this.$el.html(this.template());
             for(var k=0;k<this.collection.length;k++)
             {
-                var siteView = new SiteView({model: this.collection.at(k)});
+                var siteView = new FieldView({model: this.collection.at(k)});
                 this.$('#fields-container').append(siteView.render().el);
             }
             return this;

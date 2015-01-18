@@ -14,18 +14,31 @@ define([
         },
 
         showFrontPage: function(){
-            this.switchPage(new FrontPageView({router: this}));
-            this.navigate('');
+            if(window.session)
+                this.showSites();
+            else
+            {
+                this.switchPage(new FrontPageView({router: this}));
+                this.navigate('');
+            }
         },
 
         showSites: function(){
-            this.switchPage(new SitesPageView({router: this}));
-            this.navigate('sites');
+            if(!window.session)
+                this.showFrontPage();
+            else {
+                this.switchPage(new SitesPageView({router: this}));
+                this.navigate('sites');
+            }
         },
 
         showSite: function(id){
-            this.switchPage(new SitePageView({router: this}));
-            this.navigate('sites/'+id);
+            if(!window.session)
+                this.showFrontPage();
+            else {
+                this.switchPage(new SitePageView({router: this}));
+                this.navigate('sites/' + id);
+            }
         },
 
         switchPage: function(view){
