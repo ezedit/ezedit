@@ -44,7 +44,7 @@ define([
             if(!window.session)
                 this.showFrontPage();
             else {
-                this.switchPage(new SitePageView({router: this}));
+                this.switchPage(new SitePageView({router: this, siteId: id}));
                 this.navigate('sites/' + id);
             }
         },

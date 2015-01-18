@@ -25,25 +25,28 @@ define([
             'hideLogout': false
         },
 
-        initialize: function(){
-            var testField = {
-                name: 'Bio',
-                description: 'Your main biography that talks about your life story and why you are cool.',
-                value: 'TODO: write bio'
-            }
-            this.collection = new Fields();
-            for(var k=0;k<5;k++)
-            {
-                this.collection.push(new Field(testField));
-            }
+        initialize: function(opt){
+            var self = this;
+            this.router = opt.router;
+            this.siteId = opt.siteId;
+
+            $.get('/api/sites/'+this.siteId).done(function(data) {
+                self.site = data;
+                self.render();
+            }).fail(function(){
+               console.log("Failed to get site");
+            });
         },
 
         render: function(){
-            this.$el.html(this.template());
-            for(var k=0;k<this.collection.length;k++)
+            this.$el.html(this.template({siteId: this.siteId}));
+            if(this.site)
             {
-                var siteView = new FieldView({model: this.collection.at(k)});
-                this.$('#fields-container').append(siteView.render().el);
+                for(var k=0;k<this.site.fields.length;k++)
+                {
+                    var fieldView = new FieldView({model: this.site.fields[k], site: this.site, siteId: this.siteId, parent: this});
+                    this.$('#fields-container').append(fieldView.render().el);
+                }
             }
             return this;
         },
@@ -58,19 +61,31 @@ define([
 
         createField: function(e){
             e.preventDefault();
-            this.$('.btn-new-field').show();
-            this.$('#new-field').hide();
+            var self = this;
 
-            var newField = new Field({
+            var newField = {
                 name: e.target.elements['fieldName'].value,
                 description: e.target.elements['fieldDescription'].value,
-                value: e.target.elements['fieldValue'].value
-            })
+                body: e.target.elements['fieldBody'].value
+            };
 
-            // TODO: create on server
-            this.collection.unshift(newField);
 
-            this.render();
+            this.site.fields.unshift(newField);
+
+            $.ajax({
+                type: "PUT",
+                url: '/api/sites/'+this.siteId,
+                data: JSON.stringify(this.site),
+                dataType: 'json',
+                contentType: 'application/json'
+            }).done(function(data){
+                self.site = data;
+                self.$('.btn-new-field').show();
+                self.$('#new-field').hide();
+                self.render();
+            }).fail(function() {
+                console.log("failed to update site fields");
+            });
         }
     });
     return SitePageView;

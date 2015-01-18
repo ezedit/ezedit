@@ -17,7 +17,7 @@ router.get('/session', loginCtrl.isLoggedIn, loginCtrl.getSession)
 
 router.get('/sites', sitesCtrl.getAllSites);
 router.get('/sites/:id', sitesCtrl.getSite);
-router.get('/sites/:id/script', sitesCtrl.getSiteScript);
+router.get('/sites/:id/script.js', sitesCtrl.getSiteScript);
 router.put('/sites/:id', loginCtrl.isLoggedIn, sitesCtrl.updateSite);
 router.delete('/sites/:id', loginCtrl.isLoggedIn, sitesCtrl.deleteSite);
 router.post('/sites/', loginCtrl.isLoggedIn, sitesCtrl.createSite);

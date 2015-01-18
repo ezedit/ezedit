@@ -10,6 +10,7 @@ body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #fff;
     background-color: #009688;
+    overflow: scroll;
 }
 
 html {
@@ -339,4 +340,9 @@ body {
 
 #new-field {
     display: none;
+}
+
+p > code {
+    word-break: break-all;
+    font-size: .6em;
 }
