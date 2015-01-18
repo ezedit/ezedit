@@ -45,7 +45,7 @@ p {
 }
 
 a {
-    color: #219ab3;
+    color: #ffffff;
     -webkit-transition: all .2s ease-in-out;
     -moz-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
@@ -55,6 +55,15 @@ a:hover,
 a:focus {
     text-decoration: none;
     color: #11505d;
+}
+
+.editable-click, a.editable-click, a.editable-click:hover {
+    border-bottom: dashed 1px rgba(255,255,255,.75);
+}
+
+.editable-click:hover:after {
+    content: "\270f";
+    font-size: .75em;
 }
 
 .light {
@@ -286,4 +295,40 @@ body {
 .new-site-btn-container {
     vertical-align: top;
     text-align: right;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+#fields-container {
+    padding: 8px;
+}
+
+.field-name, .field-description {
+    background: transparent;
+    border: none;
+}
+
+.field-name {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 24px;
+    line-height: 1.1;
+    box-sizing: border-box;
+}
+
+.field-description {
+    font-size: 20px;
+    line-height: 1.6;
+    box-sizing: border-box;
+}
+
+.field {
+    margin-bottom: 35px;
+}
+
+.btn-save-field {
+    display: none;
 }
