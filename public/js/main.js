@@ -1,6 +1,7 @@
 require.config({
     shim : {
-        'bootstrap' : { 'deps' :['jquery'] }
+        'bootstrap' : { 'deps' :['jquery'] },
+        'x-editable' : { 'deps' :['jquery'] }
     },
     paths: {
         'jquery': '../bower_components/jquery/dist/jquery.min',
