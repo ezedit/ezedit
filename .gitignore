@@ -60,3 +60,6 @@ npm-debug.log
 
 # Bower dependencies (will be installed by bower install)
 public/bower_components
+
+### Custom ###
+config.json
