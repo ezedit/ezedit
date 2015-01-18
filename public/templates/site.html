@@ -1,4 +1,5 @@
-<h3><%= name %></h3>
-<p><%= description %></p>
-<textfield><% value %></textfield>
-<button class="btn btn-default">Edit</button>
+<h1 class="no-margin"><a class="field-name glyphicon" href="#" data-type="text" data-title="Edit field name"><%= name %></a></h1>
+<p class="no-margin"><a class="field-description glyphicon" href="#" data-type="text" data-title="Edit field description"><%= description %></a></p>
+<textarea  cols="80" rows="4" class="form-control field-value"><%= value %></textarea>
+<br/>
+<button class="btn btn-default btn-save-field pull-right">Save</button>
