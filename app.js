@@ -60,7 +60,19 @@ app.use(function(err, req, res, next) {
 });
 
 // set up mongoose
-mongoose.connect('mongodb://' + config.db_user + ':' + config.db_pass + '@ds031681.mongolab.com:31681/heroku_app33309479');
+var db_user, db_pass;
+if (process.env.DB_USER && process.env.DB_PASS) {
+    db_user = process.env.DB_USER;
+    db_pass = process.env.DB_PASS;
+} else if (config.db_user && config.db_pass) {
+    db_user = config.db_user;
+    db_pass = config.db_pass;
+} else {
+    db_user = 'test';
+    db_pass = 'test';
+}
+
+mongoose.connect('mongodb://' + db_user + ':' + db_pass + '@ds031681.mongolab.com:31681/heroku_app33309479');
 require('./models/models');
 
 module.exports = app;
