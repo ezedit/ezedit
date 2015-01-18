@@ -19,15 +19,15 @@ router.get('/sites', sitesCtrl.getAllSites);
 router.get('/sites/:id', sitesCtrl.getSite);
 router.get('/sites/:id/script', sitesCtrl.getSiteScript);
 router.put('/sites/:id', loginCtrl.isLoggedIn, sitesCtrl.updateSite);
-router.post('/sites/:id', loginCtrl.isLoggedIn, sitesCtrl.createSite);
 router.delete('/sites/:id', loginCtrl.isLoggedIn, sitesCtrl.deleteSite);
+router.post('/sites/', loginCtrl.isLoggedIn, sitesCtrl.createSite);
 
 router.get('/users', usersCtrl.getAllUsers);
 router.get('/users/:id', usersCtrl.getUser);
 router.get('/users/:id/sites', usersCtrl.getUserSites);
 router.put('/users/:id', loginCtrl.isLoggedIn, usersCtrl.updateUser);
 router.delete('/users/:id', loginCtrl.isLoggedIn, usersCtrl.deleteUser);
-router.post('/users', usersCtrl.createUser);
+router.post('/users',  usersCtrl.createUser);
 
 
 // TODO: misc weird routes we should delete later

@@ -98,6 +98,7 @@ module.exports.createSite = function(req, res, next) {
     var data = req.body;
 
     var site = new Site({
+        user: req.user.id,
         name: data.name,
         login: data.login,
         password: data.password,

@@ -30,25 +30,19 @@ module.exports.getUser = function(req, res, next) {
 };
 
 module.exports.getUserSites = function(req, res, next) {
-    mongoose.model('user').find({ _id: req.params.id }, function(err, user) {
+
+    mongoose.model('site').find({ user: req.params.id }, function(err, sites) {
         if (err) {
             console.log(err);
             next();
         } else {
-            mongoose.model('site').find({ _id: user._id }, function(err, sites) {
-                if (err) {
-                    console.log(err);
-                    next();
-                } else {
-                    // Remove the users password from the display
-                    var ret = [];
-                    sites.forEach(function(element) {
-                        ret.push(_.omit(element.toObject(), ['__v', 'password']));
-                    });
-
-                    res.send(ret);
-                }
+            // Remove the users password from the display
+            var ret = [];
+            sites.forEach(function(element) {
+                ret.push(_.omit(element.toObject(), ['__v', 'password']));
             });
+
+            res.send(ret);
         }
     });
 };
@@ -65,7 +59,7 @@ module.exports.updateUser = function(req, res, next) {
 };
 
 module.exports.deleteUser = function(req, res, next) {
-    // TODO: acts weird, doesn't delete right user?
+    // TODO: auser?eird, doesn't delete right user?
     mongoose.model('user').findOneAndRemove(req.params.id, function(err, user) {
         if (err) {
             console.log(err);

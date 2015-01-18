@@ -66,6 +66,8 @@ define([
             $.get('/api/logout').done(function(data){
                window.session = null;
                 Router.showFrontPage();
+            }).fail(function(){
+                console.log("Failed to log out? Wow you suck");
             });
         }
     });

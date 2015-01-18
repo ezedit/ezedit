@@ -11,11 +11,6 @@ define([
 
         template: _.template(templateText),
 
-        initialize: function() {
-            if(window.session)
-                this.router.showSites();
-        },
-
         navOptions: {
             'hideLogin': false,
             'hideRegister': false,
