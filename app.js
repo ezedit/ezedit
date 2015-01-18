@@ -1,6 +1,7 @@
 try {
     var config = require('./config.json');
 } catch (e) {
+    e.preventDefault();
     console.log('Could not find config.json');
 }
 
