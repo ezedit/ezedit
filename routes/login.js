@@ -1,6 +1,7 @@
 var bcrypt = require('bcrypt');
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
 
 // GET /
 router.get('/login', function(req, res, next) {
@@ -8,7 +9,7 @@ router.get('/login', function(req, res, next) {
     if (err) {
       console.log(err);
     } else {
-      bcrypt.hash('helloworld', salt, function(err, hash) {
+      bcrypt.hash('123testing', salt, function(err, hash) {
         if (err) {
           console.log(err);
         } else {
@@ -31,5 +32,16 @@ router.get('/login/:password/:hash', function(req, res, next) {
   });
 });
 
+router.post('/login',
+    passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }),
+    function(req, res, next) {
+      res.send(200);
+    }
+);
+
+router.get('/logout', function(req, res, next) {
+  req.logout();
+  res.send(200);
+});
 
 module.exports = router;

@@ -3,12 +3,14 @@ if (!process.env.MONGOLAB_URI) {
 }
 
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var passport = require('passport');
 
 var apiRoot = '/api';
 var routes = require('./routes/index');
@@ -25,6 +27,12 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// set up passport
+app.use(session({ secret: 'fbgm' }));
+app.use(passport.initialize());
+app.use(passport.session());
+require('./passport')(passport);
 
 app.use('/', routes);
 app.use(apiRoot, apiRoutes);
