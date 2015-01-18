@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 var _ = require('underscore');
 
 module.exports.getAllUsers = function(req, res, next) {
@@ -79,17 +80,29 @@ module.exports.createUser = function(req, res, next) {
     var User = require('../models/user');
     var data = req.body;
 
-    var user = new User({
-        email: data.email,
-        password: data.password
-    });
-
-    user.save(function(err, user) {
+    bcrypt.genSalt(10, function(err, salt) {
         if (err) {
             console.log(err);
-            next();
         } else {
-            res.send(_.omit(user.toObject(), ['__v', 'password']));
+            bcrypt.hash(data.password, salt, function(err, hash) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var user = new User({
+                        email: data.email,
+                        password: hash
+                    });
+
+                    user.save(function(err, user) {
+                        if (err) {
+                            console.log(err);
+                            next();
+                        } else {
+                            res.send(_.omit(user.toObject(), ['__v', 'password']));
+                        }
+                    });
+                }
+            });
         }
     });
 };
