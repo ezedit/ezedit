@@ -10,9 +10,27 @@
                     <td>
                         <h2>Fields</h2>
                     </td>
-                    <td class="new-field-btn-container"><a class="btn btn-default pull-right" href="#">+Add New Field</a></td>
+                    <td class="new-field-btn-container"><a class="btn btn-default btn-new-field pull-right" href="#">+Add New Field</a></td>
                 </tr>
             </table>
+            <div id="new-field">
+                <form>
+                    <div class="form-group">
+                        <label for="fieldName">Field Name</label>
+                        <input type="text" class="form-control" id="fieldName" placeholder="Field Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldDescription">Field Description</label>
+                        <input type="text" class="form-control" id="fieldDescription" placeholder="Field Description" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="fieldValue">Field Value</label>
+                        <textarea class="form-control" id="fieldValue" placeholder="Field Value" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right">Create</button>
+                </form>
+            </div>
+            <div id="fields-container"></div>
         </div>
     </div>
 </div>

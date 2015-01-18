@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
-    email: String,
-    password: String
+    email: {type: String, required: true},
+    password: {type: String, required: true}
 });
 
 module.exports = userSchema;
