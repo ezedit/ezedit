@@ -13,11 +13,8 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 
 var apiRoot = '/api';
-var routes = require('./routes/index');
-var apiRoutes = require('./routes/api');
-var siteRoutes = require('./routes/sites');
-var loginRoutes = require('./routes/login');
-var userRoutes = require('./routes/users');
+var routes = require('./routes/routes');
+
 
 var app = express();
 
@@ -34,11 +31,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./passport')(passport);
 
-app.use('/', routes);
-app.use(apiRoot, apiRoutes);
-app.use(apiRoot, siteRoutes);
-app.use(apiRoot, loginRoutes);
-app.use(apiRoot, userRoutes);
+app.use(apiRoot, routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -59,7 +52,7 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500).send(err.message);
+  res.status(err.status || 500).json(err);
 });
 
 // set up mongoose
