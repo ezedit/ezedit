@@ -48,6 +48,9 @@ define([
                     this.$('#fields-container').append(fieldView.render().el);
                 }
             }
+            if (window.session.isClient) {
+                this.$('.btn-new-field').hide();
+            }
             return this;
         },
 
