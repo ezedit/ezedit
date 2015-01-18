@@ -15,11 +15,23 @@ router.get('/site', function(req, res, next) {
 
 // GET /site/:id
 router.get('/site/:id', function(req, res, next) {
-  mongoose.model('site').findById(req.params.id, function(err, sites) {
+  mongoose.model('site').findOne({ _id: req.params.id }, function(err, sites) {
     if (err) {
       console.log(err);
     } else {
       res.send(sites);
+    }
+  });
+});
+
+// PUT /site/:id
+router.put('/site/:id', function(req, res, next) {
+  // @TODO: add param verification
+  mongoose.model('site').findByIdAndUpdate(req.params.id, req.body, function(err, site) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(site);
     }
   });
 });
