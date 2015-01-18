@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 
-// GET /site
-router.get('/site', function(req, res, next) {
+// GET /sites
+router.get('/sites', function(req, res) {
   mongoose.model('site').find(function(err, sites) {
     if (err) {
       console.log(err);
@@ -13,8 +13,8 @@ router.get('/site', function(req, res, next) {
   });
 });
 
-// GET /site/:id
-router.get('/site/:id', function(req, res, next) {
+// GET /sites/:id
+router.get('/sites/:id', function(req, res) {
   mongoose.model('site').findOne({ _id: req.params.id }, function(err, sites) {
     if (err) {
       console.log(err);
@@ -24,8 +24,8 @@ router.get('/site/:id', function(req, res, next) {
   });
 });
 
-// PUT /site/:id
-router.put('/site/:id', function(req, res, next) {
+// PUT /sites/:id
+router.put('/sites/:id', function(req, res) {
   // @TODO: add param verification
   mongoose.model('site').findByIdAndUpdate(req.params.id, req.body, function(err, site) {
     if (err) {
@@ -37,7 +37,7 @@ router.put('/site/:id', function(req, res, next) {
 });
 
 // POST /site
-router.post('/site', function(req, res, next) {
+router.post('/sites', function(req, res) {
   var Site = require('../models/site');
   var data = req.body;
 
