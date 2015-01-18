@@ -136,6 +136,10 @@ a:focus {
     }
 }
 
+#content, .page {
+    height: 100%;
+}
+
 .intro {
     display: table;
     width: 100%;
