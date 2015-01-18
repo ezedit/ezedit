@@ -7,7 +7,7 @@ define([
         defaults: {
             name: 'Untitled Field',
             description: 'No description.',
-            value: 'Lorem Ipsum'
+            body: 'Lorem Ipsum'
         }
     });
     return Field;

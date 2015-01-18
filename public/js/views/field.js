@@ -11,12 +11,12 @@ define([
         template: _.template(templateText),
 
         events: {
-            'keyup .field-value': 'valueChanged',
+            'keyup .field-body': 'bodyChanged',
             'click .btn-save-field': 'save'
         },
 
         render: function(){
-            this.$el.html(this.template(this.model.attributes));
+            this.$el.html(this.template(this.model));
             this.$('.field-name').editable({
                success: function() {
                    console.log("Edited field name!");
@@ -30,8 +30,8 @@ define([
             return this;
         },
 
-        valueChanged: function() {
-            if(this.model.get('value') != this.$('.field-name').html())
+        bodyChanged: function() {
+            if(this.model.body != this.$('.field-name').html())
                 this.$('.btn-save-field').show();
         },
 
