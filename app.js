@@ -1,4 +1,8 @@
-var config = require('./config.json');
+try {
+    var config = require('./config.json');
+} catch (e) {
+    console.log('Could not find config.json');
+}
 
 var express = require('express');
 var path = require('path');
