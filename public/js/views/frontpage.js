@@ -2,13 +2,19 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'router',
     'text!/templates/frontpage.html'
-], function($, _, Backbone, templateText){
+], function($, _, Backbone, Router, templateText){
     var FrontPageView = Backbone.View.extend({
         tagName: 'div',
         className: 'page',
 
         template: _.template(templateText),
+
+        initialize: function() {
+            if(window.session)
+                this.router.showSites();
+        },
 
         navOptions: {
             'hideLogin': false,

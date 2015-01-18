@@ -1,4 +1,5 @@
 var passport = require('passport');
+var _ = require('underscore');
 
 module.exports.ok = function(req, res, next) {
     res.send('ok');
@@ -18,4 +19,9 @@ module.exports.isLoggedIn = function(req, res, next) {
         next();
     else
         res.send(401);
+};
+
+module.exports.getSession = function(req, res, next) {
+    if(req.user)
+        res.send(_.omit(req.user.toObject(), ['__v', 'password']));
 };

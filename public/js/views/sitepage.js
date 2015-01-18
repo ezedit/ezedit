@@ -2,11 +2,12 @@ define([
     'jquery',
     'underscore',
     'backbone',
+    'router',
     'text!/templates/sitepage.html',
     'views/site',
     'models/field',
     'models/fields'
-], function($, _, Backbone, templateText, SiteView, Field, Fields){
+], function($, _, Backbone, Router, templateText, SiteView, Field, Fields){
     var SitePageView = Backbone.View.extend({
         tagName: 'div',
         className: 'page',
@@ -25,6 +26,9 @@ define([
         },
 
         initialize: function(){
+            if(!window.session)
+                this.router.showFrontPage();
+
             var testField = {
                 name: 'Bio',
                 description: 'Your main biography that talks about your life story and why you are cool.',

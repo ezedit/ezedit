@@ -20,6 +20,11 @@ define([
             'hideLogout': false
         },
 
+        initialize: function() {
+            if(!window.session)
+                Backbone.history.navigate('', {trigger: true});
+        },
+
         render: function(){
             this.$el.html(this.template());
             return this;
