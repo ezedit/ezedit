@@ -10,6 +10,10 @@ define([
 
         template: _.template(templateText),
 
+        events: {
+            'click .btn-new-site': 'newSite'
+        },
+
         navOptions: {
             'hideLogin': true,
             'hideRegister': true,
@@ -19,6 +23,10 @@ define([
         render: function(){
             this.$el.html(this.template());
             return this;
+        },
+
+        newSite: function(){
+
         }
     });
     return SitesPageView;
